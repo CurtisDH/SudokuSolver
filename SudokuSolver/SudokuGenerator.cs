@@ -2,6 +2,18 @@ namespace SudokuSolver
 {
     public class SudokuGenerator
     {
+        // Things to consider when generating a board
+        // Has to be unique -- TODO implement later
+        // Could just generate a board by starting with a random number in a random cell?
+        public Grid test2()
+        {
+            var grid = new Grid(9, 9);
+            var dfs = new DepthFirstSearch(grid, true);
+            var solved = dfs.StartSearch(0, 0);
+            Console.WriteLine(grid.ToString());
+            return grid;
+        }
+
         public Grid test()
         {
             var grid = new Grid(9, 9);

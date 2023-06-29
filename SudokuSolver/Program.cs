@@ -13,9 +13,11 @@ namespace SudokuSolver
             Console.WriteLine();
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            (bool solved, grid) = DFS.StartSearch();
+            (bool solved, grid) = DFS.StartSearch(0, 0);
             sw.Stop();
-            Console.WriteLine($"solved:{solved} elapsed time:{sw.Elapsed.TotalMilliseconds}ms \n{grid.ToString()}");
+            // Console.WriteLine($"solved:{solved} elapsed time:{sw.Elapsed.TotalMilliseconds}ms \n{grid.ToString()}");
+            //
+            sg.test2();
         }
     }
 }

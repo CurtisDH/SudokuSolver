@@ -4,17 +4,19 @@ public class DepthFirstSearch
 {
     private char[]? _choices;
     private readonly Cell[,] _cells;
+    private bool _useRandomChar = false;
 
-    public DepthFirstSearch(Grid sudoku)
+    public DepthFirstSearch(Grid sudoku, bool useRandomChar = false)
     {
         InitialiseChoices();
         _cells = UnpackGrid(sudoku);
+        this._useRandomChar = useRandomChar;
     }
 
-    public (bool, Grid) StartSearch()
+    public (bool, Grid) StartSearch(int x, int y)
     {
         // Returns false if unsolvable 
-        return Dfs(0, 0);
+        return Dfs(x, y);
     }
 
     // TODO change to while loop instead of recursion
@@ -119,6 +121,12 @@ public class DepthFirstSearch
             l.Add(i.ToString().ToCharArray()[0]);
         }
 
+        if (_useRandomChar)
+        {
+            Random rng = new Random();
+            l = l.OrderBy(n => rng.Next()).ToList();
+        }
+
         _choices = l.ToArray();
         foreach (var ch in _choices)
         {
@@ -156,6 +164,7 @@ public class DepthFirstSearch
 
     private Grid PackGrid(Cell[,] cells)
     {
+        // TODO still gotta remove these magic numbers 
         Grid grid = new Grid(9, 9);
         for (int sqRow = 0; sqRow < 3; sqRow++)
         {
