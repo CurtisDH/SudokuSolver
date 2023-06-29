@@ -83,7 +83,7 @@ public class DepthFirstSearch
 
     private bool CheckRow(int row, char c)
     {
-        for (int i = 3; i < _cells.GetLength(1); i++)
+        for (int i = 0; i < _cells.GetLength(1); i++)
         {
             var cell = _cells[row, i].Value;
             if (cell == c)
