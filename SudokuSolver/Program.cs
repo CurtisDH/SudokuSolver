@@ -1,4 +1,6 @@
-﻿namespace SudokuSolver
+﻿using System.Diagnostics;
+
+namespace SudokuSolver
 {
     internal class Program
     {
@@ -9,8 +11,11 @@
             Console.WriteLine(grid.ToString());
             var DFS = new DepthFirstSearch(grid);
             Console.WriteLine();
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             (bool solved, grid) = DFS.StartSearch();
-            Console.WriteLine($"solved:{solved} \n{grid.ToString()}");
+            sw.Stop();
+            Console.WriteLine($"solved:{solved} elapsed time:{sw.Elapsed.TotalMilliseconds}ms \n{grid.ToString()}");
         }
     }
 }
