@@ -2,7 +2,7 @@ namespace SudokuSolver
 {
     public class SudokuGenerator
     {
-        public void test()
+        public Grid test()
         {
             var grid = new Grid(9, 9);
             char[,] sudoku = new char[9, 9]
@@ -18,7 +18,7 @@ namespace SudokuSolver
                 { '0', '0', '0', '0', '8', '0', '0', '7', '9' },
             };
             grid.LoadExistingGame(sudoku);
-            Console.WriteLine(grid.ToString());
+            return grid;
         }
     }
 }
