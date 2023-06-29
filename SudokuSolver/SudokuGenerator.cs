@@ -5,6 +5,19 @@ namespace SudokuSolver
         public void test()
         {
             var grid = new Grid(9, 9);
+            char[,] sudoku = new char[9, 9]
+            {
+                { '5', '3', '0', '0', '7', '0', '0', '0', '0' },
+                { '6', '0', '0', '1', '9', '5', '0', '0', '0' },
+                { '0', '9', '8', '0', '0', '0', '0', '6', '0' },
+                { '8', '0', '0', '0', '6', '0', '0', '0', '3' },
+                { '4', '0', '0', '8', '0', '3', '0', '0', '1' },
+                { '7', '0', '0', '0', '2', '0', '0', '0', '6' },
+                { '0', '6', '0', '0', '0', '0', '2', '8', '0' },
+                { '0', '0', '0', '4', '1', '9', '0', '0', '5' },
+                { '0', '0', '0', '0', '8', '0', '0', '7', '9' },
+            };
+            grid.LoadExistingGame(sudoku);
             Console.WriteLine(grid.ToString());
         }
     }
@@ -26,7 +39,7 @@ namespace SudokuSolver
 
     class Square
     {
-        private Cell[,] cells;
+        public Cell[,] cells;
 
         public Square(int size)
         {
@@ -75,6 +88,32 @@ namespace SudokuSolver
                 }
             }
         }
+
+        public void LoadExistingGame(char[,] sudoku)
+        {
+            int gridSize = sudoku.GetLength(0); // only supports a square grid atm
+            
+            for (int row = 0; row < gridSize; row++)
+            {
+                for (int col = 0; col < gridSize; col++)
+                {
+                    int squareRow = row / 3;
+                    int squareCol = col / 3;
+
+                    int cellRow = row % 3;
+                    int cellCol = col % 3;
+
+                    Cell replaceCell = new Cell();
+                    if (sudoku[row, col] != '0')
+                    {
+                        replaceCell = new Cell(sudoku[row, col]);
+                    }
+
+                    squares[squareRow, squareCol].cells[cellRow, cellCol] = replaceCell;
+                }
+            }
+        }
+
 
         public override string ToString()
         {
