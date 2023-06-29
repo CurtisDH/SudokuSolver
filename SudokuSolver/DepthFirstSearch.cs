@@ -2,15 +2,6 @@ namespace SudokuSolver;
 
 public class DepthFirstSearch
 {
-    // we want to input a grid
-    // choose a starting point (0,0)
-    // select a number, check if its valid by doing the following
-    // 1. Check the contents of the current square the cell is situated in
-    // 2. check the entire row
-    // 3. check the entire column
-    // if a number conflicts, we return false, 'returning control' back recursively.
-    // if it doesn't we set the value, and move onto the next cell and repeat the process
-
     private char[]? _choices;
     private readonly Cell[,] _cells;
 
@@ -26,7 +17,7 @@ public class DepthFirstSearch
         return Dfs(0, 0);
     }
 
-    // TODO chang to while loop instead of recursion
+    // TODO change to while loop instead of recursion
     private (bool, Grid) Dfs(int row, int column)
     {
         if (row == 9) // filled all rows Sudoku is solved
