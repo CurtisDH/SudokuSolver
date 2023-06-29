@@ -8,9 +8,9 @@ public class DepthFirstSearch
 
     public DepthFirstSearch(Grid sudoku, bool useRandomChar = false)
     {
-        InitialiseChoices();
-        _cells = UnpackGrid(sudoku);
         this._useRandomChar = useRandomChar;
+        InitialiseChoices();
+        _cells = sudoku.Unpack();
     }
 
     public (bool, Grid) StartSearch(int x, int y)
@@ -134,35 +134,9 @@ public class DepthFirstSearch
         }
     }
 
-
-    // TODO this is hideous
-    private Cell[,] UnpackGrid(Grid grid)
-    {
-        // TODO remove the hardcoded values
-        var Cells = new Cell[9, 9];
-
-        // Unpack squares into Cells array
-        for (int sqRow = 0; sqRow < 3; sqRow++)
-        {
-            for (int sqCol = 0; sqCol < 3; sqCol++)
-            {
-                Square square = grid.Squares[sqRow, sqCol];
-
-                for (int cellRow = 0; cellRow < 3; cellRow++)
-                {
-                    for (int cellCol = 0; cellCol < 3; cellCol++)
-                    {
-                        Cells[sqRow * 3 + cellRow, sqCol * 3 + cellCol] = square.cells[cellRow, cellCol];
-                    }
-                }
-            }
-        }
-
-        return Cells;
-    }
     // TODO this is hideous
 
-    private Grid PackGrid(Cell[,] cells)
+    public Grid PackGrid(Cell[,] cells)
     {
         // TODO still gotta remove these magic numbers 
         Grid grid = new Grid(9, 9);

@@ -64,4 +64,31 @@ public class Grid
         formatted = formatted.TrimEnd('\n', '-'); // Remove trailing new line and dash
         return formatted;
     }
+
+    // TODO this is hideous
+    public Cell[,] Unpack()
+    {
+        var grid = this;
+        // TODO remove the hardcoded values
+        var Cells = new Cell[9, 9];
+
+        // Unpack squares into Cells array
+        for (int sqRow = 0; sqRow < 3; sqRow++)
+        {
+            for (int sqCol = 0; sqCol < 3; sqCol++)
+            {
+                Square square = grid.Squares[sqRow, sqCol];
+
+                for (int cellRow = 0; cellRow < 3; cellRow++)
+                {
+                    for (int cellCol = 0; cellCol < 3; cellCol++)
+                    {
+                        Cells[sqRow * 3 + cellRow, sqCol * 3 + cellCol] = square.cells[cellRow, cellCol];
+                    }
+                }
+            }
+        }
+
+        return Cells;
+    }
 }

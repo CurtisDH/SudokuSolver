@@ -9,8 +9,23 @@ namespace SudokuSolver
         {
             var grid = new Grid(9, 9);
             var dfs = new DepthFirstSearch(grid, true);
-            var solved = dfs.StartSearch(0, 0);
+            dfs.StartSearch(0, 0);
             Console.WriteLine(grid.ToString());
+            // randomise grid by removing random cells
+            var unpacked = grid.Unpack();
+            int removeCells = 65;
+            System.Random x = new Random();
+            System.Random y = new Random();
+            for (int i = 0; i < removeCells; i++)
+            {
+                unpacked[x.Next(0, 9), y.Next(0, 9)].Clear();
+            }
+
+            grid = dfs.PackGrid(unpacked);
+            Console.WriteLine();
+            Console.WriteLine(grid.ToString());
+            Console.WriteLine();
+
             return grid;
         }
 
