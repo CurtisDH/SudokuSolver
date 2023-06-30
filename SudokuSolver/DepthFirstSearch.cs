@@ -128,10 +128,6 @@ public class DepthFirstSearch
         }
 
         _choices = l.ToArray();
-        foreach (var ch in _choices)
-        {
-            Console.WriteLine($"CHOICE INIT:{ch}");
-        }
     }
 
     // TODO this is hideous
